@@ -13,7 +13,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@revgaming/helpers": "npm:helpers@^1.0.1",
+    "@revgaming/helpers": "^1.0.1",
     "@revgaming/preference": "^1.0.1"
   },
   "scripts": {}
