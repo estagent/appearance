@@ -1,0 +1,20 @@
+{
+  "name": "@revgaming/appearance",
+  "version": "1.0.1",
+  "author": "estagent <estagent@gmail.com>",
+  "description": "dark appearance watcher and preference",
+  "homepage": "https://github.com/estagent/appearance",
+  "keywords": [
+    "javascript",
+    "config",
+    "laravel",
+    "dark",
+    "appearance"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@revgaming/helpers": "npm:helpers@^1.0.1",
+    "@revgaming/preference": "^1.0.1"
+  },
+  "scripts": {}
+}
