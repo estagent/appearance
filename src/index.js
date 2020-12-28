@@ -1,14 +1,17 @@
 import {mergeOptions} from '@revgaming/helpers';
+import {mergeTranslations} from '@revgaming/languages';
 import Preference from '@revgaming/preference';
 import translations from './translations';
 
-let isDark = false;
-
+export let isDark = false;
 let options;
-
-const defaults = {
-  class: 'dark',
+export const appearanceName = function() {
+  const mode = Preference.get('appearance');
+  if (mode === 'dark') return __('appearance.dark');
+  else if (mode === 'light') return __('appearance.light');
+  return __('appearance.auto');
 };
+
 
 const checkPreferDark = () => {
   return (
@@ -16,7 +19,6 @@ const checkPreferDark = () => {
     window.matchMedia('(prefers-color-scheme: dark)').matches
   );
 };
-
 const shouldDark = () => {
   const mode = Preference.get('appearance');
 
@@ -24,16 +26,14 @@ const shouldDark = () => {
   else if (mode === 'light') return false;
   else return checkPreferDark();
 };
-
 const setDarkMode = () => {
   isDark = shouldDark();
   if (isDark) {
-    document.querySelector('html').classList.add(options.class);
+    document.querySelector('html').classList.add(options.darkClass);
   } else {
-    document.querySelector('html').classList.remove(options.class);
+    document.querySelector('html').classList.remove(options.darkClass);
   }
 };
-
 const watchDarkMode = () => {
   if (!window.matchMedia) return;
   window.matchMedia('(prefers-color-scheme: dark)').addListener(function() {
@@ -41,41 +41,33 @@ const watchDarkMode = () => {
     setDarkMode();
   });
 };
-
-const getAppearanceName = function() {
-  const mode = Preference.get('appearance');
-  if (mode === 'dark') return __('appearance.dark');
-  else if (mode === 'light') return __('appearance.light');
-  return __('appearance.auto');
-};
-
-export default function(opts) {
-  options = mergeOptions(opts, defaults);
+export const bootAppearance = (opts) => {
+  options = mergeOptions(opts, {
+    darkClass: 'dark',
+  });
   setDarkMode();
   watchDarkMode();
-  if (window['mergeTranslations'])
-    mergeTranslations('appearance', translations);
-
+  mergeTranslations('appearance', translations);
   return {
-    isDark: () => isDark,
-    getAppearanceName: getAppearanceName,
-    setAppearance: function(mode) {
-      // Preference.set(
-      //     'appearance',
-      //     $(this).is(':checked')
-      //         ? checkPreferDark()
-      //             ? null
-      //             : 'dark'
-      //         : checkPreferDark()
-      //         ? 'light'
-      //         : null
-      // )
-      if (!['dark', 'light', 'auto'].includes(mode)) throw 'invalid code';
-      Preference.set('appearance', mode);
-      setDarkMode();
-    },
+    isDark: isDark,
   };
-}
+};
+const setAppearance = (mode) => {
+  // Preference.set(
+  //     'appearance',
+  //     $(this).is(':checked')
+  //         ? checkPreferDark()
+  //             ? null
+  //             : 'dark'
+  //         : checkPreferDark()
+  //         ? 'light'
+  //         : null
+  // )
+  if (!['dark', 'light', 'auto'].includes(mode)) throw 'invalid code';
+  Preference.set('appearance', mode);
+  setDarkMode();
+};
+
 
 // const handleThemeChange = (event) => {
 //     event.preventDefault()
