@@ -16,16 +16,27 @@ export const bootAppearance = opts => {
   return {
     isDark: isDark,
     setAppearance: setAppearance,
+    getAppearanceName: getAppearanceName,
+    getAppearances: getAppearances,
   }
 }
 
-export const appearanceName = function () {
+export const getAppearanceName = function () {
   const mode = Preference.get('appearance')
   if (mode === 'dark') return __('appearance.dark')
   else if (mode === 'light') return __('appearance.light')
   return __('appearance.auto')
 }
 
+export const getAppearances = () => {
+  const data = [][('auto', 'dark', 'light')].forEach(function (item) {
+    data.push({
+      code: item,
+      name: getAppearanceName(item),
+    })
+  })
+  return data
+}
 const checkPreferDark = () => {
   return (
     window.matchMedia &&
