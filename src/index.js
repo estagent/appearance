@@ -15,6 +15,7 @@ export const bootAppearance = opts => {
   mergeTranslations('appearance', translations)
   return {
     isDark: isDark,
+    setAppearance: setAppearance,
   }
 }
 
@@ -54,17 +55,7 @@ const watchDarkMode = () => {
   })
 }
 
-const setAppearance = mode => {
-  // Preference.set(
-  //     'appearance',
-  //     $(this).is(':checked')
-  //         ? checkPreferDark()
-  //             ? null
-  //             : 'dark'
-  //         : checkPreferDark()
-  //         ? 'light'
-  //         : null
-  // )
+export const setAppearance = mode => {
   if (!['dark', 'light', 'auto'].includes(mode)) throw 'invalid code'
   Preference.set('appearance', mode)
   setDarkMode()
