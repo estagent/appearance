@@ -1,15 +1,12 @@
-import {mergeOptions} from '@revgaming/helpers'
 import {mergeTranslations} from '@revgaming/languages'
 import Preference from '@revgaming/preference'
 import translations from './translations'
 
 export let isDark = false
-let options
+const options = {}
 
-export const bootAppearance = opts => {
-  options = mergeOptions(opts, {
-    darkClass: 'dark',
-  })
+export const bootAppearance = darkClass => {
+  options.darkClass = darkClass ?? 'dark'
   setDarkMode()
   watchDarkMode()
   mergeTranslations('appearance', translations)
