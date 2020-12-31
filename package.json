@@ -1,6 +1,6 @@
 {
   "name": "@revgaming/appearance",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "author": "estagent <estagent@gmail.com>",
   "description": "dark appearance watcher and preference",
   "homepage": "https://github.com/estagent/appearance",
@@ -13,7 +13,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@revgaming/languages": "^3.0.3",
+    "@revgaming/languages": "^3.1.1",
     "@revgaming/preference": "^1.0.2"
   },
   "scripts": {}
