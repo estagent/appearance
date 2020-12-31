@@ -18,7 +18,7 @@ export const bootAppearance = darkClass => {
   }
 }
 
-export const getAppearanceName = (mode) => {
+export const getAppearanceName = mode => {
   if (!mode) mode = Preference.get('appearance')
   if (mode === 'dark') return __('appearance.dark')
   else if (mode === 'light') return __('appearance.light')
@@ -26,8 +26,8 @@ export const getAppearanceName = (mode) => {
 }
 
 export const getAppearances = () => {
-  const data = [];
-  ['auto', 'dark', 'light'].forEach(function(item) {
+  const data = []
+  ;['auto', 'dark', 'light'].forEach(function (item) {
     data.push({
       code: item,
       name: getAppearanceName(item),
@@ -58,7 +58,7 @@ const setDarkMode = () => {
 }
 const watchDarkMode = () => {
   if (!window.matchMedia) return
-  window.matchMedia('(prefers-color-scheme: dark)').addListener(function() {
+  window.matchMedia('(prefers-color-scheme: dark)').addListener(function () {
     Preference.unset('appearance')
     setDarkMode()
   })
@@ -68,4 +68,5 @@ export const setAppearance = mode => {
   if (!['dark', 'light', 'auto'].includes(mode)) throw 'invalid code'
   Preference.set('appearance', mode)
   setDarkMode()
+  return true
 }
