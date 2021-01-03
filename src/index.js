@@ -5,8 +5,9 @@ import translations from './translations'
 export let isDark = false
 const options = {}
 
-export const bootAppearance = darkClass => {
-  options.darkClass = darkClass ?? 'dark'
+export const bootAppearance = opts => {
+  options.darkClass = opts.darkClass ?? 'dark'
+
   setDarkMode()
   watchDarkMode()
   mergeTranslations('appearance', translations)
